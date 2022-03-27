@@ -1,8 +1,17 @@
+.maindiv {
+  display: flex;
+}
+.editorwrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  /* height: 100vh; */
+}
 .profilewrap {
-  width: 24%;
-  height: 100%;
+  width: 25%;
+  height: 100vh;
   background-color: rgb(17, 18, 41);
-  position: fixed;
+  /* position: relative; */
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -10,6 +19,8 @@
 .up {
   display: flex;
   height: 80%;
+  margin-left: 20px;
+  margin-right: 20px;
   flex-direction: column;
   align-items: center;
 }
@@ -38,7 +49,23 @@
 .leave {
   background-color: burlywood;
 }
-
+.customization {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 10vh;
+}
+/* codemirror styling overriding*/
+.CodeMirror {
+  min-height: calc(90vh - 20px);
+  max-width: 100vw;
+  font-size: 20px;
+  line-height: 1.5;
+  padding-top: 20px;
+}
+.CodeMirror-wrap pre {
+  word-break: break-word;
+}
 /* individual page style */
 .client {
   display: flex;
@@ -47,7 +74,7 @@
 }
 /* logo style */
 .content1 {
-  font-size: 1.3vw;
+  font-size: 1.2vw;
   position: relative;
   margin-bottom: 100px;
   max-width: 50%;
