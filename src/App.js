@@ -13,7 +13,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' exact element={<Home />} />
-          <Route path='/editor/:id' exact element={<EditorPage />} />
+          <Route path='/editor/:roomId' exact element={<EditorPage />} />
         </Routes>
       </BrowserRouter>
     </>
