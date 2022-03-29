@@ -19,6 +19,7 @@ const EditorPage = () => {
   // const roomId = url.substring(url.lastIndexOf('/') + 1);
   const { roomId } = useParams();
   const socketRef = useRef(null); //change on useref component dont re render
+  const codeRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
   const [clients, setClients] = useState([]);
@@ -47,6 +48,11 @@ const EditorPage = () => {
           console.log(`${username} joined`);
         }
         setClients(clientsConnected);
+        console.log(codeRef.current);
+        socketRef.current.emit(ACTIONS.SYNC_CODE, {
+          code: codeRef.current,
+          socketId,
+        });
       }
     );
 
@@ -75,11 +81,22 @@ const EditorPage = () => {
     color: '#fff',
   };
 
-  const copyId = () => {
-    navigator.clipboard.writeText(roomId);
-    toast.success('Room id copied !', {
-      style: toastStyle,
-    });
+  const leaveRoom = () => {
+    navigate('/');
+  };
+
+  const copyId = async () => {
+    try {
+      await navigator.clipboard.writeText(roomId);
+      toast.success('Room id copied to clipboard !', {
+        style: toastStyle,
+      });
+    } catch (err) {
+      toast.error(`Can't copy Room id!`, {
+        style: toastStyle,
+      });
+      console.log(err);
+    }
   };
 
   if (!location.state) {
@@ -110,14 +127,23 @@ const EditorPage = () => {
           <button className='btn copy' onClick={copyId}>
             Copy Room id
           </button>
-          <button className='btn leave'>Leave</button>
+          <button className='btn leave' onClick={leaveRoom}>
+            Leave
+          </button>
         </div>
       </div>
       <div className='editorwrap'>
         <div className='customization'>
           <h2 style={{ color: 'white' }}>customization to be added</h2>
         </div>
-        <Editor />
+        <Editor
+          socketRef={socketRef}
+          roomId={roomId}
+          onCodeChange={(code) => {
+            console.log(`check2 : ${code}`);
+            codeRef.current = code;
+          }}
+        />
       </div>
     </div>
   );

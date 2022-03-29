@@ -4,7 +4,7 @@ const ClientIndividual = ({ username }) => {
   return (
     <div className='client'>
       <Avatar name={username} round='15px' size={50} />
-      <span style={{ color: 'white' }}>{username}</span>
+      <span style={{ color: 'white', textAlign: 'center' }}>{username}</span>
     </div>
   );
 };
